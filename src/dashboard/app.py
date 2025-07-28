@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 import folium
 from streamlit_folium import st_folium
-from dotenv import load_dotenv
-
-load_dotenv()
 import sys
 import os
+from dotenv import load_dotenv
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from agent.fleet_management_agent import FleetManagementAgent
+
+load_dotenv()
 
 st.set_page_config(layout="wide")
 
@@ -101,14 +101,14 @@ st.subheader("Llama Agent Insights")
 # Initialize the agent
 agent = FleetManagementAgent(data_path=DATA_URL)
 
-if st.button("Get AI Insights for Selected Vehicle"):
-    with st.spinner("Getting insights from Llama Agent..."):
+user_question = st.text_area("Ask a question about the selected vehicle:", "What are the potential issues with this vehicle?")
+
+if st.button("Get AI Feedback"):
+    with st.spinner("Getting feedback from Llama Agent..."):
         # Prepare data for the agent
-        # For simplicity, let's send the latest vehicle data as a string
-        # In a real application, you might want to send more structured data or a summary
         data_for_agent = latest_vehicle_data.to_json(indent=2)
         
-        insights = agent.get_llama_insights(data_for_agent)
+        insights = agent.get_llama_insights(data_for_agent, user_question)
         st.write(insights)
 
 # Optional: Display raw data sent to agent for debugging

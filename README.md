@@ -24,7 +24,7 @@ This project is a simple AI agent that monitors a fleet of vehicles and detects 
 
 2.  **Run the agent to check for issues:**
     ```bash
-    python3 -m src.agent.agent
+    python3 -m src.agent.fleet_management_agent
     ```
 
 3.  **Run the dashboard:**

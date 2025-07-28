@@ -35,7 +35,7 @@ class FleetManagementAgent:
 
         return issues
 
-    def get_llama_insights(self, data_for_agent=None):
+    def get_llama_insights(self, data_for_agent=None, user_question=None):
         if not self.client.api_key:
             return "API key is missing. Please set the NVIDIA_API_KEY environment variable."
 
@@ -55,6 +55,8 @@ class FleetManagementAgent:
 
             Data:
             {data_for_agent}
+
+            User Question: {user_question}
             """
 
         completion = self.client.chat.completions.create(
