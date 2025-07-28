@@ -1,6 +1,6 @@
 # Fleet Management AI Agent
 
-This project is a simple AI agent that monitors a fleet of vehicles and detects potential issues.
+This project is a simple AI agent that monitors a fleet of vehicles and detects potential issues using Nvidia Nemo NIM.
 
 ## Setup
 
