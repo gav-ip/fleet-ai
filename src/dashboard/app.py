@@ -2,8 +2,14 @@ import streamlit as st
 import pandas as pd
 import folium
 from streamlit_folium import st_folium
-from agent.fleet_management_agent import FleetManagementAgent
+from dotenv import load_dotenv
+
+load_dotenv()
+import sys
 import os
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from agent.fleet_management_agent import FleetManagementAgent
 
 st.set_page_config(layout="wide")
 
