@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import folium
 from streamlit_folium import st_folium
+from agent.fleet_management_agent import FleetManagementAgent
+import os
 
 st.set_page_config(layout="wide")
 
@@ -86,3 +88,23 @@ if not selected_vehicle_location.empty:
 
 # Display the map
 st_folium(m, width=1200, height=600)
+
+# Llama Agent Integration
+st.subheader("Llama Agent Insights")
+
+# Initialize the agent
+agent = FleetManagementAgent(data_path=DATA_URL)
+
+if st.button("Get AI Insights for Selected Vehicle"):
+    with st.spinner("Getting insights from Llama Agent..."):
+        # Prepare data for the agent
+        # For simplicity, let's send the latest vehicle data as a string
+        # In a real application, you might want to send more structured data or a summary
+        data_for_agent = latest_vehicle_data.to_json(indent=2)
+        
+        insights = agent.get_llama_insights(data_for_agent)
+        st.write(insights)
+
+# Optional: Display raw data sent to agent for debugging
+# with st.expander("View Raw Data Sent to Agent"):
+#     st.json(latest_vehicle_data.to_dict())
