@@ -1,0 +1,42 @@
+{
+  "name": "fleet-ai",
+  "version": "1.0.0",
+  "description": "This project is a simple AI agent that monitors a fleet of vehicles and detects potential issues using Nvidia Nemo NIM.",
+  "main": "index.js",
+  "dependencies": {
+    "@smartcar/auth": "^2.11.0",
+    "axios": "^1.11.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-scripts": "^5.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gav-ip/fleet-ai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gav-ip/fleet-ai/issues"
+  },
+  "homepage": "https://github.com/gav-ip/fleet-ai#readme",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

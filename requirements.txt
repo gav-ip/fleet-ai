@@ -5,3 +5,6 @@ streamlit-folium
 openai
 ruff
 python-dotenv
+flask
+flask-cors
+smartcar
