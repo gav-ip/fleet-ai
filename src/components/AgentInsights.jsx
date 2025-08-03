@@ -1,15 +1,15 @@
 
 import React, { useState } from 'react';
-import axios from 'axios';
+import { getInsights } from '../api';
 
 const AgentInsights = () => {
     const [question, setQuestion] = useState('');
     const [insights, setInsights] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const getInsights = () => {
+    const handleGetInsights = () => {
         setLoading(true);
-        axios.post(`${process.env.REACT_APP_SERVER}/insights`, { question })
+        getInsights(question)
             .then(res => {
                 setInsights(res.data.insights);
                 setLoading(false);
@@ -28,7 +28,7 @@ const AgentInsights = () => {
                 onChange={(e) => setQuestion(e.target.value)} 
                 placeholder="Ask a question about the vehicle..."
             />
-            <button onClick={getInsights} disabled={loading}>
+            <button onClick={handleGetInsights} disabled={loading}>
                 {loading ? 'Getting Insights...' : 'Get AI Feedback'}
             </button>
             {insights && <pre>{insights}</pre>}

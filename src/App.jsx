@@ -1,10 +1,8 @@
 import { Component } from 'react';
-import axios from 'axios';
 import Smartcar from '@smartcar/auth';
-
 import Connect from './components/Connect';
-import Vehicle from './components/Vehicle';
-import AgentInsights from './components/AgentInsights';
+import Dashboard from './components/Dashboard';
+import { exchangeCode } from './api';
 
 class App extends Component {
   constructor(props) {
@@ -20,21 +18,24 @@ class App extends Component {
     this.smartcar = new Smartcar({
       clientId: process.env.REACT_APP_CLIENT_ID,
       redirectUri: process.env.REACT_APP_REDIRECT_URI,
-      scope: ['read_vehicle_info'],
+      scope: [
+        'read_vehicle_info', 
+        'read_location', 
+        'read_odometer', 
+        'read_tires', 
+        'read_vin', 
+        'read_engine_oil',
+        'read_battery'
+    ],
       onComplete: this.onComplete,
       testMode: true,
     });
   }
 
   onComplete(err, code, state) {
-    return axios
-      .get(`${process.env.REACT_APP_SERVER}/exchange?code=${code}`)
-      .then(() => {
-        return axios.get(`${process.env.REACT_APP_SERVER}/vehicle`);
-      })
-      .then(res => {
-        this.setState({ vehicle: res.data });
-      });
+    exchangeCode(code).then(() => {
+      this.setState({ vehicle: { connected: true } });
+    });
   }
 
   authorize() {
@@ -42,11 +43,8 @@ class App extends Component {
   }
 
   render() {
-    return Object.keys(this.state.vehicle).length !== 0 ? (
-      <div>
-        <Vehicle info={this.state.vehicle} />
-        <AgentInsights />
-      </div>
+    return this.state.vehicle.connected ? (
+      <Dashboard />
     ) : (
       <Connect onClick={this.authorize} />
     );
